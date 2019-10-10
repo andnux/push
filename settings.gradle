@@ -1,2 +1,2 @@
-include ':app', ':core', ':mipush', ':getui', ':meizu'
+include ':app', ':core', ':mipush', ':getui', ':meizu', ':huawei'
 rootProject.name='push'
