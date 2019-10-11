@@ -34,4 +34,5 @@ dependencies {
     api project(path: ':getui')
     api project(path: ':meizu')
     api project(path: ':mipush')
+    api project(path: ':huawei')
 }

@@ -17,6 +17,7 @@ import top.andnux.core.PushClient;
 import top.andnux.core.PushMessage;
 import top.andnux.core.PushMessageReceiver;
 import top.andnux.getui.GeTuiManager;
+import top.andnux.huawei.HuaWeiManager;
 import top.andnux.meizu.MeizuPushManager;
 import top.andnux.mipush.MiPushManager;
 
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btn_switch_mipush).setOnClickListener(this);
         findViewById(R.id.btn_switch_meizu).setOnClickListener(this);
         findViewById(R.id.btn_switch_getui).setOnClickListener(this);
+        findViewById(R.id.btn_switch_huawei).setOnClickListener(this);
         findViewById(R.id.btn_start).setOnClickListener(this);
         findViewById(R.id.btn_close).setOnClickListener(this);
         findViewById(R.id.btn_set_alias).setOnClickListener(this);
@@ -103,6 +105,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_switch_getui:
                 PushClient.getInstance().setUsePushName(GeTuiManager.NAME);
+                break;
+            case R.id.btn_switch_huawei:
+                PushClient.getInstance().setUsePushName(HuaWeiManager.NAME);
                 break;
             case R.id.btn_start:
                 PushClient.getInstance().registerPush(getApplicationContext());
