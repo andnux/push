@@ -10,6 +10,7 @@ buildscript {
         versionName = "1.0.0"
     }
     repositories {
+        maven { url "http://mvn.gt.igexin.com/nexus/content/repositories/releases/" }
         maven {url 'http://developer.huawei.com/repo/'}
         maven { url 'https://jitpack.io' }
         jcenter()
