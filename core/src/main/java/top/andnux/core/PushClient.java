@@ -105,6 +105,8 @@ public class PushClient {
                 return "meizuPush";
             } else if (pushAdapterMap.containsKey("mipush") && brand.equalsIgnoreCase("xiaomi")) {
                 return "mipush";
+            } else if (pushAdapterMap.containsKey("huawei") && brand.equalsIgnoreCase("huawei")) {
+                return "huawei";
             } else if (pushAdapterMap.containsKey("getui")) {
                 return "getui";
             }
