@@ -56,14 +56,11 @@ public class PushClient {
         Set<String> keys = mPushManagerMap.keySet();
         for (String key : keys) {
             PushManager pushManager = mPushManagerMap.get(key);
+            if (pushManager == null) return;
             if (key.equals(mUsePushName)) {
-                if (pushManager != null) {
-                    pushManager.registerPush(context);
-                }
+                pushManager.registerPush(context);
             } else {
-                if (pushManager != null) {
-                    pushManager.unRegisterPush(context);
-                }
+                pushManager.unRegisterPush(context);
             }
         }
     }
@@ -76,7 +73,9 @@ public class PushClient {
     }
 
     public void unRegisterPush(Context context) {
-        getPushManager().unRegisterPush(context);
+        PushManager pushManager = getPushManager();
+        if (pushManager == null) return;
+        pushManager.unRegisterPush(context);
     }
 
     public void setUsePushName(String sUsePushName) {
@@ -84,19 +83,27 @@ public class PushClient {
     }
 
     public void setAlias(Context context, String alias) {
-        getPushManager().setAlias(context, alias);
+        PushManager pushManager = getPushManager();
+        if (pushManager == null) return;
+        pushManager.setAlias(context, alias);
     }
 
     public void unsetAlias(Context context, String alias) {
-        getPushManager().unsetAlias(context, alias);
+        PushManager pushManager = getPushManager();
+        if (pushManager == null) return;
+        pushManager.unsetAlias(context, alias);
     }
 
     public void setTags(Context context, String... tags) {
-        getPushManager().setTags(context, tags);
+        PushManager pushManager = getPushManager();
+        if (pushManager == null) return;
+        pushManager.setTags(context, tags);
     }
 
     public void unsetTags(Context context, String... tags) {
-        getPushManager().unsetTags(context, tags);
+        PushManager pushManager = getPushManager();
+        if (pushManager == null) return;
+        pushManager.unsetTags(context, tags);
     }
 
     public static class Selector {

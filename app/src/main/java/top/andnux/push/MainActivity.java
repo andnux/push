@@ -23,13 +23,13 @@ import top.andnux.mipush.MiPushManager;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     TextView text;
-
+    TextView text_use_push;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         text = (TextView) findViewById(R.id.text);
-        TextView text_use_push = (TextView) findViewById(R.id.text_use_push);
+        text_use_push = (TextView) findViewById(R.id.text_use_push);
         text_use_push.setText("当前推送平台：" + PushClient.getInstance().getUsePushName());
         IntentFilter filter = new IntentFilter();
         filter.addAction(PushMessageReceiver.RECEIVE_THROUGH_MESSAGE);
@@ -99,15 +99,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.btn_switch_mipush:
                 PushClient.getInstance().setUsePushName(MiPushManager.NAME);
+                text_use_push.setText("当前推送平台：" + PushClient.getInstance().getUsePushName());
                 break;
             case R.id.btn_switch_meizu:
                 PushClient.getInstance().setUsePushName(MeizuPushManager.NAME);
+                text_use_push.setText("当前推送平台：" + PushClient.getInstance().getUsePushName());
                 break;
             case R.id.btn_switch_getui:
                 PushClient.getInstance().setUsePushName(GeTuiManager.NAME);
+                text_use_push.setText("当前推送平台：" + PushClient.getInstance().getUsePushName());
                 break;
             case R.id.btn_switch_huawei:
                 PushClient.getInstance().setUsePushName(HuaWeiManager.NAME);
+                text_use_push.setText("当前推送平台：" + PushClient.getInstance().getUsePushName());
                 break;
             case R.id.btn_start:
                 PushClient.getInstance().registerPush(getApplicationContext());
