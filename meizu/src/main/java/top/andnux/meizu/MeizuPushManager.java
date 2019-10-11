@@ -12,8 +12,8 @@ import top.andnux.core.MessageProvider;
 
 public class MeizuPushManager implements top.andnux.core.PushManager {
 
-    static final String NAME = "meizuPush";
-    static MessageProvider sMessageProvider;
+    public static final String NAME = "meizuPush";
+    public  static MessageProvider sMessageProvider;
 
     private String appId;
     private String appKey;

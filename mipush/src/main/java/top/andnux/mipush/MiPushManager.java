@@ -11,8 +11,8 @@ import top.andnux.core.PushManager;
 
 public class MiPushManager implements PushManager {
 
-    static final String NAME = "mipush";
-    static MessageProvider sMessageProvider;
+    public static final String NAME = "mipush";
+    public static MessageProvider sMessageProvider;
     private String appId;
     private String appKey;
 
