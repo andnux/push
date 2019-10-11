@@ -4,21 +4,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.meizu.cloud.pushinternal.DebugLogger;
 import com.meizu.cloud.pushsdk.MzPushMessageReceiver;
+import com.meizu.cloud.pushsdk.handler.MzPushMessage;
 import com.meizu.cloud.pushsdk.notification.PushNotificationBuilder;
 import com.meizu.cloud.pushsdk.platform.message.PushSwitchStatus;
 import com.meizu.cloud.pushsdk.platform.message.RegisterStatus;
 import com.meizu.cloud.pushsdk.platform.message.SubAliasStatus;
 import com.meizu.cloud.pushsdk.platform.message.SubTagsStatus;
 import com.meizu.cloud.pushsdk.platform.message.UnRegisterStatus;
+
 import top.andnux.core.PushMessage;
 
 public class MeizuPushMsgReceiver extends MzPushMessageReceiver {
 
     private static final String TAG = "MeizuPushMsgReceiver";
-    private int mipush_notification;
-    private int mipush_small_notification;
+    private int push_icon;
+    private int push_small_icon;
 
     @Override
     public void onRegister(Context context, String pushid) {
@@ -27,8 +28,8 @@ public class MeizuPushMsgReceiver extends MzPushMessageReceiver {
 
     @Override
     public void onHandleIntent(Context context, Intent intent) {
-        mipush_notification = context.getResources().getIdentifier("mipush_notification", "drawable", context.getPackageName());
-        mipush_small_notification = context.getResources().getIdentifier("mipush_small_notification", "drawable", context.getPackageName());
+        push_icon = context.getResources().getIdentifier("ic_launcher", "mipmap", context.getPackageName());
+        push_small_icon = context.getResources().getIdentifier("ic_launcher", "mipmap", context.getPackageName());
         super.onHandleIntent(context, intent);
     }
 
@@ -52,16 +53,25 @@ public class MeizuPushMsgReceiver extends MzPushMessageReceiver {
     //设置通知栏小图标
     @Override
     public void onUpdateNotificationBuilder(PushNotificationBuilder pushNotificationBuilder) {
-        if (mipush_notification > 0){
-            pushNotificationBuilder.setmLargIcon(mipush_notification);
+        if (push_icon > 0){
+            pushNotificationBuilder.setmLargIcon(push_icon);
             Log.d(TAG,"设置通知栏大图标");
         }else {
-            Log.e(TAG,"缺少drawable/mipush_notification.png");
+            if (MeizuPushManager.mIcon > 0) {
+                pushNotificationBuilder.setmLargIcon(MeizuPushManager.mIcon);
+            } else {
+                Log.e(TAG, "缺少drawable/mipush_notification.png");
+            }
         }
-        if (mipush_small_notification > 0){
-            pushNotificationBuilder.setmStatusbarIcon(mipush_small_notification);
+        if (push_small_icon > 0){
+            pushNotificationBuilder.setmStatusbarIcon(push_small_icon);
             Log.d(TAG,"设置通知栏小图标");
-            Log.e(TAG,"缺少drawable/mipush_small_notification.png");
+        } else {
+            if (MeizuPushManager.mIcon > 0) {
+                pushNotificationBuilder.setmStatusbarIcon(MeizuPushManager.mIcon);
+            } else {
+                Log.e(TAG, "缺少drawable/mipush_small_notification.png");
+            }
         }
     }
 
@@ -93,40 +103,35 @@ public class MeizuPushMsgReceiver extends MzPushMessageReceiver {
         Log.i(TAG, "onSubAliasStatus " + subAliasStatus);
         //别名回调
     }
-//    @Override
-//    public void onNotificationArrived(Context context, String title, String content, String selfDefineContentString) {
-//        //通知栏消息到达回调，flyme6基于android6.0以上不再回调
-//        DebugLogger.i(TAG,"onNotificationArrived title "+title + "content "+content + " selfDefineContentString "+selfDefineContentString);
-//
-//        if (MeizuPushManager.sMessageProvider != null){
-//            PushMessage message = new PushMessage();
-//            message.setPlatform(MeizuPushManager.NAME);
-//            message.setTitle(title);
-//            message.setDescription(content);
-//            message.setContent(selfDefineContentString);
-//            MeizuPushManager.sMessageProvider.onNotificationMessageArrived(context,message);
-//        }
-//    }
-//
-//    @Override
-//    public void onNotificationClicked(Context context, String title, String content, String selfDefineContentString) {
-//        //通知栏消息点击回调
-//        DebugLogger.i(TAG,"onNotificationClicked title "+title + "content "+content + " selfDefineContentString "+selfDefineContentString);
-//
-//        if (MeizuPushManager.sMessageProvider != null){
-//            PushMessage message = new PushMessage();
-//            message.setPlatform(MeizuPushManager.NAME);
-//            message.setTitle(title);
-//            message.setDescription(content);
-//            message.setContent(selfDefineContentString);
-//            MeizuPushManager.sMessageProvider.onNotificationMessageClicked(context,message);
-//        }
-//    }
-//
-//    @Override
-//    public void onNotificationDeleted(Context context, String title, String content, String selfDefineContentString) {
-//        //通知栏消息删除回调；flyme6基于android6.0以上不再回调
-//        DebugLogger.i(TAG,"onNotificationDeleted title "+title + "content "+content + " selfDefineContentString "+selfDefineContentString);
-//    }
 
+    @Override
+    public void onNotificationClicked(Context context, MzPushMessage mzPushMessage) {
+        super.onNotificationClicked(context, mzPushMessage);
+        if (MeizuPushManager.sMessageProvider != null) {
+            PushMessage message = new PushMessage();
+            message.setPlatform(MeizuPushManager.NAME);
+            message.setTitle(mzPushMessage.getTitle());
+            message.setDescription(mzPushMessage.getContent());
+            message.setContent(mzPushMessage.getSelfDefineContentString());
+            MeizuPushManager.sMessageProvider.onNotificationMessageClicked(context, message);
+        }
+    }
+
+    @Override
+    public void onNotificationArrived(Context context, MzPushMessage mzPushMessage) {
+        super.onNotificationArrived(context, mzPushMessage);
+        if (MeizuPushManager.sMessageProvider != null) {
+            PushMessage message = new PushMessage();
+            message.setPlatform(MeizuPushManager.NAME);
+            message.setTitle(mzPushMessage.getTitle());
+            message.setDescription(mzPushMessage.getContent());
+            message.setContent(mzPushMessage.getSelfDefineContentString());
+            MeizuPushManager.sMessageProvider.onNotificationMessageArrived(context, message);
+        }
+    }
+
+    @Override
+    public void onNotificationDeleted(Context context, MzPushMessage mzPushMessage) {
+        super.onNotificationDeleted(context, mzPushMessage);
+    }
 }

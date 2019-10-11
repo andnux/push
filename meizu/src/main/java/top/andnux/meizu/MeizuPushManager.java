@@ -2,6 +2,8 @@ package top.andnux.meizu;
 
 import android.content.Context;
 
+import androidx.annotation.IdRes;
+
 import com.meizu.cloud.pushsdk.PushManager;
 
 import top.andnux.core.MessageProvider;
@@ -17,10 +19,14 @@ public class MeizuPushManager implements top.andnux.core.PushManager {
 
     private String appId;
     private String appKey;
+    public static int mIcon;
+    public static int mIconSmall;
 
-    public MeizuPushManager(String appId, String appKey) {
+    public MeizuPushManager(String appId, String appKey, @IdRes int icon, @IdRes int iconSmall) {
         this.appId = appId;
         this.appKey = appKey;
+        mIcon = icon;
+        mIconSmall = iconSmall;
     }
 
     @Override

@@ -71,11 +71,6 @@ public class MiPushMessageReceiver extends PushMessageReceiver {
         MiPushManager.sMessageProvider.onNotificationMessageArrived(context, mixPushMessage);
     }
 
-
-
-
-
-
     @Override
     public void onCommandResult(Context context, MiPushCommandMessage message) {
         String command = message.getCommand();
