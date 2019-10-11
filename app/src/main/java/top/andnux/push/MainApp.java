@@ -11,6 +11,7 @@ public class MainApp extends Application {
         super.onCreate();
         PushClient instance = PushClient.getInstance();
         instance.addPushManager(new MiPushManager("2882303761518200312","5731820040312"));
+        instance.setPushIntentService(PushService.class);
         instance.registerPush(this);
     }
 }

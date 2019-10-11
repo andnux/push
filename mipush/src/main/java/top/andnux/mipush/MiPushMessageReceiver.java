@@ -14,6 +14,7 @@ import java.util.List;
 import top.andnux.core.PushMessage;
 
 public class MiPushMessageReceiver extends PushMessageReceiver {
+
     private static final String TAG = "MiPushMessageReceiver";
     private String mRegId;
     private String mAlias;

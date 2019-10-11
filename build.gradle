@@ -10,6 +10,7 @@ buildscript {
         versionName = "1.0.0"
     }
     repositories {
+        maven {url 'http://developer.huawei.com/repo/'}
         maven { url 'https://jitpack.io' }
         jcenter()
         google()
@@ -18,11 +19,13 @@ buildscript {
         classpath 'com.android.tools.build:gradle:3.5.1'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.huawei.agconnect:agcp:1.0.0.300'
     }
 }
 
 allprojects {
     repositories {
+        maven {url 'http://developer.huawei.com/repo/'}
         maven { url 'https://jitpack.io' }
         jcenter()
         google()

@@ -1,64 +1,59 @@
-package top.andnux.mipush;
+package top.andnux.meizu;
 
 import android.content.Context;
 
-import com.xiaomi.mipush.sdk.MiPushClient;
-
-import java.util.List;
+import com.meizu.cloud.pushsdk.PushManager;
 
 import top.andnux.core.MessageProvider;
-import top.andnux.core.PushManager;
 
-public class MiPushManager implements PushManager {
+/**
+ * 魅族推送只支持Flyme系统，务必需要注意
+ */
 
-    static final String NAME = "mipush";
+public class MeizuPushManager implements top.andnux.core.PushManager {
+
+    static final String NAME = "meizuPush";
     static MessageProvider sMessageProvider;
+
     private String appId;
     private String appKey;
 
-    public MiPushManager(String appId, String appKey) {
+    public MeizuPushManager(String appId, String appKey) {
         this.appId = appId;
         this.appKey = appKey;
     }
 
     @Override
     public void registerPush(Context context) {
-        MiPushClient.registerPush(context.getApplicationContext(), appId, appKey);
+        PushManager.register(context, appId, appKey);
     }
 
     @Override
     public void unRegisterPush(Context context) {
-        unsetAlias(context, null);
-        MiPushClient.unregisterPush(context.getApplicationContext());
+        PushManager.unRegister(context, appId, appKey);
     }
 
     @Override
     public void setAlias(Context context, String alias) {
-        if (!MiPushClient.getAllAlias(context).contains(alias)) {
-            MiPushClient.setAlias(context, alias, null);
-        }
+        PushManager.subScribeAlias(context, appId, appKey, PushManager.getPushId(context), alias);
     }
 
     @Override
     public void unsetAlias(Context context, String alias) {
-        List<String> allAlias = MiPushClient.getAllAlias(context);
-        for (int i = 0; i < allAlias.size(); i++) {
-            MiPushClient.unsetAlias(context, allAlias.get(i), null);
-        }
+        PushManager.unSubScribeAlias(context, appId, appKey, PushManager.getPushId(context), alias);
     }
 
     @Override
     public void setTags(Context context, String... tags) {
-        for (String tag : tags){
-            MiPushClient.subscribe(context, tag, null);
+        for (String tag : tags) {
+            PushManager.subScribeTags(context, appId, appKey, PushManager.getPushId(context), tag);
         }
-
     }
 
     @Override
     public void unsetTags(Context context, String... tags) {
         for (String tag : tags) {
-            MiPushClient.unsubscribe(context, tag, null);
+            PushManager.unSubScribeTags(context, appId, appKey, PushManager.getPushId(context), tag);
         }
     }
 
