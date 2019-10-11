@@ -16,6 +16,7 @@ import com.xiaomi.mipush.sdk.Logger;
 import top.andnux.core.PushClient;
 import top.andnux.core.PushMessage;
 import top.andnux.core.PushMessageReceiver;
+import top.andnux.getui.GeTuiManager;
 import top.andnux.meizu.MeizuPushManager;
 import top.andnux.mipush.MiPushManager;
 
@@ -97,12 +98,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_switch_mipush:
                 PushClient.getInstance().setUsePushName(MiPushManager.NAME);
                 break;
-//            case R.id.btn_switch_meizu:
-//                PushClient.getInstance().setUsePushName(MeizuPushManager.NAME);
-//                break;
-//            case R.id.btn_switch_getui:
-//                PushClient.getInstance().setUsePushName(GeTuiManager.NAME);
-//                break;
+            case R.id.btn_switch_meizu:
+                PushClient.getInstance().setUsePushName(MeizuPushManager.NAME);
+                break;
+            case R.id.btn_switch_getui:
+                PushClient.getInstance().setUsePushName(GeTuiManager.NAME);
+                break;
             case R.id.btn_start:
                 PushClient.getInstance().registerPush(getApplicationContext());
                 break;
