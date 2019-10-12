@@ -18,5 +18,6 @@ dependencies {
     implementation "com.github.andnux.push:meizu:${version}" 
     implementation "com.github.andnux.push:mipush:${version}" 
     implementation "com.github.andnux.push:huawei:${version}" 
+    implementation "com.github.andnux.push:google:${version}" 
 }
 ```
