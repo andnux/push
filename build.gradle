@@ -21,6 +21,7 @@ buildscript {
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.huawei.agconnect:agcp:1.0.0.300'
+        classpath 'com.google.gms:google-services:4.3.2'
     }
 }
 

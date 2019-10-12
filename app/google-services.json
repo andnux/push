@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1060368606162",
+    "firebase_url": "https://push-14a1d.firebaseio.com",
+    "project_id": "push-14a1d",
+    "storage_bucket": "push-14a1d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1060368606162:android:3ec2319217b2a6705d5e0b",
+        "android_client_info": {
+          "package_name": "top.andnux.push"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1060368606162-23ovj77hsa4clsvra2od0usf7isrju70.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7ezmpwFl8Xex2RUH1C5OvotVQKvcsL1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1060368606162-23ovj77hsa4clsvra2od0usf7isrju70.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

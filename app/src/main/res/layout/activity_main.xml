@@ -41,6 +41,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="切换 华为推送" />
+        <Button
+            android:id="@+id/btn_switch_google"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="切换 Google推送" />
     </LinearLayout>
 
     <LinearLayout
